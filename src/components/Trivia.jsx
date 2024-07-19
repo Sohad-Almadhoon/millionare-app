@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useSound from "use-sound";
 import play from "../sounds/play.mp3";
 import correct from "../sounds/correct.mp3";
@@ -42,16 +42,22 @@ const Trivia = ({ data, questionNumber, setStop, setQuestionNumber }) => {
   }, [data, questionNumber]);
   return (
     <div className="trivia">
-      <div className="question">{question?.question}</div>
-      <div className="answers">
-        {question?.answers.map((a) => (
-          <div
-            className={`answer ${selectedAnswer === a && className}`}
-            onClick={() => handleClick(a)}>
-            {a.text}
+      {questionNumber === 15 ? (
+        <div>You will be a millionare</div>
+      ) : (
+        <>
+          <div className="question">{question?.question}</div>
+          <div className="answers">
+            {question?.answers.map((a) => (
+              <div
+                className={`answer ${selectedAnswer === a && className}`}
+                onClick={() => handleClick(a)}>
+                {a.text}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };
